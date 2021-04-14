@@ -17,6 +17,9 @@ export class TinyMce
     @bindable theme:string = 'modern'; //modern, mobile, inline
     @bindable menubar:boolean = true;
     @bindable content:string = '';
+    @bindable skinUrl:string = '../../tinymce/tinymce/skins/lightgray';
+    @bindable language:string = 'en';
+    @bindable plugins:string[] = ['link', 'paste', 'hr', 'save', 'textcolor'];
 
     private element:Element;
 
@@ -47,9 +50,10 @@ export class TinyMce
             tinymce.init({
                 //convert_urls: false,
                 menubar: this.menubar,            
-                skin_url: '../../tinymce/tinymce/skins/lightgray',
+                language: this.language,
+                skin_url: this.skinUrl,
                 selector: `#${this.editorId}`,
-                plugins: ['link', 'paste', 'hr', 'save', 'textcolor']
+                plugins: this.plugins
             });
     
             this.editorInstance = tinymce.editors[this.editorId];
